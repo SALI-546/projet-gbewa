@@ -8,7 +8,7 @@ const AddPaymentOrderModal = ({ isVisible, onClose }) => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div className="bg-white rounded-lg p-6 w-1/3">
                 <h2 className="text-2xl font-bold mb-4">ORDRE DE PAIEMENT</h2>
-                {/* Formulaire avec les champs mis à jour */}
+                
                 <form>
                     <div className="mb-4">
                         <label className="block text-gray-700">Nom du projet</label>
