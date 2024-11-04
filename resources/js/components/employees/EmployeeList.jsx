@@ -72,7 +72,7 @@ const EmployeeList = () => {
       email: 'nom@gmail.com',
       telephone: '98654321',
     },
-    // Ajoutez d'autres employés si nécessaire
+   
   ]);
 
   const [isFormOpen, setIsFormOpen] = useState(false);

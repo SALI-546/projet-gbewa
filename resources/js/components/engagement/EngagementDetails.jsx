@@ -1,6 +1,7 @@
 // EngagementDetails.jsx
-
 import React from 'react';
+import BudgetTrackingDetails from './BudgetTrackingDetails';
+import AccountingImputationDetails from './AccountingImputationDetails';
 
 const EngagementDetails = ({ onClose, activeTab, onTabChange }) => {
 
@@ -111,7 +112,7 @@ const EngagementDetails = ({ onClose, activeTab, onTabChange }) => {
                                 </tbody>
                             </table>
 
-                            {/* Footer information positioned at the bottom-right of the table */}
+                            {/* Footer information  */}
                             <div className="flex justify-end mt-4">
                                 <div className="text-right">
                                     <p>Emetteur: (signature et date)</p>
@@ -123,16 +124,10 @@ const EngagementDetails = ({ onClose, activeTab, onTabChange }) => {
                     </div>
                 )}
                 {activeTab === 'suivie' && (
-                    <div>
-                        <h3 className="text-lg font-bold mb-4">Suivie Budgétaire</h3>
-                        <p>Contenu spécifique pour le suivi budgétaire peut être ajouté ici.</p>
-                    </div>
+                    <BudgetTrackingDetails />
                 )}
                 {activeTab === 'imputation' && (
-                    <div>
-                        <h3 className="text-lg font-bold mb-4">Imputation Comptable</h3>
-                        <p>Contenu spécifique pour l'imputation comptable peut être ajouté ici.</p>
-                    </div>
+                    <AccountingImputationDetails />
                 )}
             </div>
 
