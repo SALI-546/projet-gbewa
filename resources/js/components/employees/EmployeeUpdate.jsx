@@ -1,3 +1,5 @@
+// EmployeeUpdate.jsx
+
 import React, { useState } from 'react';
 
 const EmployeeUpdate = ({ employee, closeModal, updateEmployee }) => {
@@ -10,22 +12,25 @@ const EmployeeUpdate = ({ employee, closeModal, updateEmployee }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateEmployee(updatedEmployee); // Pass updated employee to the parent component
-    closeModal(); // Close the modal after submission
+    updateEmployee(updatedEmployee); // Passer l'employé mis à jour au composant parent
+    closeModal(); // Fermer la modale après la soumission
   };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="bg-white shadow-lg rounded-lg w-2/3 max-h-full overflow-auto p-6">
-        {/* Title Section */}
+      <div
+        className="bg-white shadow-lg rounded-lg w-2/3 max-h-[80vh] overflow-y-auto p-6 no-scrollbar"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} // Pour Firefox et IE
+      >
+        {/* Section Titre */}
         <div className="mb-6 text-center">
           <h2 className="text-2xl font-bold">Modifier Fiche de poste</h2>
           <h3 className="text-xl text-green-600 font-semibold">{updatedEmployee.poste}</h3>
         </div>
 
-        {/* Form for editing employee details */}
+        {/* Formulaire pour éditer les détails de l'employé */}
         <form onSubmit={handleSubmit}>
-          {/* Affectation Section */}
+          {/* Section Affectation */}
           <div className="border-t pt-4 pb-4">
             <h4 className="text-lg font-semibold">Affectation</h4>
             <div className="flex justify-between">
@@ -50,7 +55,7 @@ const EmployeeUpdate = ({ employee, closeModal, updateEmployee }) => {
             </div>
           </div>
 
-          {/* Informations Section */}
+          {/* Section Informations */}
           <div className="border-t pt-4 pb-4">
             <h4 className="text-lg font-semibold">Informations</h4>
             <div className="flex justify-between">
@@ -105,7 +110,7 @@ const EmployeeUpdate = ({ employee, closeModal, updateEmployee }) => {
             </div>
           </div>
 
-          {/* Rémunération Section */}
+          {/* Section Rémunération */}
           <div className="border-t pt-4 pb-4">
             <h4 className="text-lg font-semibold">Rémunération Du Poste</h4>
             <div className="flex justify-between">
@@ -130,7 +135,7 @@ const EmployeeUpdate = ({ employee, closeModal, updateEmployee }) => {
             </div>
           </div>
 
-          {/* Autonomie and Responsabilités */}
+          {/* Section Autonomie et Responsabilités */}
           <div className="border-t pt-4 pb-4">
             <h4 className="text-lg font-semibold">Autonomie et Responsabilités</h4>
             <input
@@ -138,11 +143,11 @@ const EmployeeUpdate = ({ employee, closeModal, updateEmployee }) => {
               name="autonomie"
               value={updatedEmployee.autonomie || 'A Compléter'}
               onChange={handleChange}
-              className="ml-4 p-2 border rounded-lg w-2/3"
+              className="ml-4 p-2 border rounded-lg w-full"
             />
           </div>
 
-          {/* Liaisons Fonctionnelles */}
+          {/* Section Liaisons Fonctionnelles */}
           <div className="border-t pt-4 pb-4">
             <h4 className="text-lg font-semibold">Liaisons Fonctionnelles</h4>
             <div className="flex justify-between">
@@ -167,7 +172,7 @@ const EmployeeUpdate = ({ employee, closeModal, updateEmployee }) => {
             </div>
           </div>
 
-          {/* Missions et Activités */}
+          {/* Section Missions et Activités */}
           <div className="border-t pt-4 pb-4">
             <h4 className="text-lg font-semibold">Missions et Activités du Poste</h4>
             <input
@@ -175,18 +180,18 @@ const EmployeeUpdate = ({ employee, closeModal, updateEmployee }) => {
               name="missionsPrincipales"
               value={updatedEmployee.missionsPrincipales || 'A Compléter'}
               onChange={handleChange}
-              className="ml-4 p-2 border rounded-lg w-2/3"
+              className="ml-4 p-2 border rounded-lg w-full"
             />
             <input
               type="text"
               name="missionsSpecifiques"
               value={updatedEmployee.missionsSpecifiques || 'A Compléter'}
               onChange={handleChange}
-              className="ml-4 p-2 border rounded-lg w-2/3 mt-4"
+              className="ml-4 p-2 border rounded-lg w-full mt-4"
             />
           </div>
 
-          {/* Compétences Requises */}
+          {/* Section Compétences Requises */}
           <div className="border-t pt-4 pb-4">
             <h4 className="text-lg font-semibold">Compétences Requises</h4>
             <input
@@ -194,25 +199,25 @@ const EmployeeUpdate = ({ employee, closeModal, updateEmployee }) => {
               name="competencesSavoirs"
               value={updatedEmployee.competencesSavoirs || 'A Compléter'}
               onChange={handleChange}
-              className="ml-4 p-2 border rounded-lg w-2/3"
+              className="ml-4 p-2 border rounded-lg w-full"
             />
             <input
               type="text"
               name="competencesSavoirsFaire"
               value={updatedEmployee.competencesSavoirsFaire || 'A Compléter'}
               onChange={handleChange}
-              className="ml-4 p-2 border rounded-lg w-2/3 mt-4"
+              className="ml-4 p-2 border rounded-lg w-full mt-4"
             />
             <input
               type="text"
               name="competencesSavoirsEtre"
               value={updatedEmployee.competencesSavoirsEtre || 'A Compléter'}
               onChange={handleChange}
-              className="ml-4 p-2 border rounded-lg w-2/3 mt-4"
+              className="ml-4 p-2 border rounded-lg w-full mt-4"
             />
           </div>
 
-          {/* Submit and Cancel Buttons */}
+          {/* Boutons de soumission et d'annulation */}
           <div className="text-right mt-6">
             <button
               type="button"

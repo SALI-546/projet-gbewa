@@ -1,18 +1,30 @@
+// EmployeeDetails.jsx
+
 import React from 'react';
 
 const EmployeeDetails = ({ employee, closeModal }) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="bg-white shadow-lg rounded-lg w-1/2 max-h-full overflow-auto p-4">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div
+        className="bg-white shadow-lg rounded-lg w-1/2 max-h-[80vh] overflow-y-auto p-6 no-scrollbar"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} // Pour Firefox et IE
+      >
         {/* Title Section */}
         <div className="mb-6 text-center">
           <h2 className="text-2xl font-bold">Fiche de poste</h2>
-          <h3 className="text-xl text-green-600 font-semibold">{employee.poste}</h3>
-          <p className="text-sm text-gray-600">Poste occupé par : <strong>{employee.nom} {employee.prenoms}</strong></p>
+          <h3 className="text-xl text-green-600 font-semibold">Comptable</h3>
+          <div className="border-t border-b py-4 mb-4 text-sm text-gray-600">
+            <span className="block">POSTE OCCUPÉ PAR</span>
+            <input
+              type="text"
+              placeholder="Nom & Prénom"
+              
+            />
+          </div>
         </div>
 
         {/* Affectation Section */}
-        <div className="border-t pt-4 pb-4">
+        <div className="border-t border-b py-4 mb-4">
           <h4 className="text-lg font-semibold">Affectation</h4>
           <div className="flex justify-between">
             <p>Service :</p>
@@ -25,7 +37,7 @@ const EmployeeDetails = ({ employee, closeModal }) => {
         </div>
 
         {/* Informations Section */}
-        <div className="border-t pt-4 pb-4">
+        <div className="border-t border-b py-4 mb-4">
           <h4 className="text-lg font-semibold">Informations</h4>
           <div className="flex justify-between">
             <p>Nature Du Poste :</p>
@@ -50,7 +62,7 @@ const EmployeeDetails = ({ employee, closeModal }) => {
         </div>
 
         {/* Rémunération Section */}
-        <div className="border-t pt-4 pb-4">
+        <div className="border-t border-b py-4 mb-4">
           <h4 className="text-lg font-semibold">Rémunération Du Poste</h4>
           <div className="flex justify-between">
             <p>Annuel Brut :</p>
@@ -63,15 +75,13 @@ const EmployeeDetails = ({ employee, closeModal }) => {
         </div>
 
         {/* Autonomie et Responsabilités Section */}
-        <div className="border-t pt-4 pb-4">
+        <div className="border-t border-b py-4 mb-4">
           <h4 className="text-lg font-semibold">Autonomie et Responsabilités</h4>
-          <div className="flex justify-between">
-            <p>A Compléter</p>
-          </div>
+          <p className="text-gray-700">A Compléter</p>
         </div>
 
         {/* Liaisons Fonctionnelles Section */}
-        <div className="border-t pt-4 pb-4">
+        <div className="border-t border-b py-4 mb-4">
           <h4 className="text-lg font-semibold">Liaisons Fonctionnelles</h4>
           <div className="flex justify-between">
             <p>Interne À l'Organisation :</p>
@@ -84,15 +94,13 @@ const EmployeeDetails = ({ employee, closeModal }) => {
         </div>
 
         {/* Moyens Techniques Section */}
-        <div className="border-t pt-4 pb-4">
+        <div className="border-t border-b py-4 mb-4">
           <h4 className="text-lg font-semibold">Moyens Techniques Mis à Disposition</h4>
-          <div className="flex justify-between">
-            <p>A Compléter</p>
-          </div>
+          <p className="text-gray-700">A Compléter</p>
         </div>
 
         {/* Missions et Activités du Poste Section */}
-        <div className="border-t pt-4 pb-4">
+        <div className="border-t border-b py-4 mb-4">
           <h4 className="text-lg font-semibold">Missions et Activités du Poste</h4>
           <div className="flex justify-between">
             <p>Missions Principales :</p>
@@ -109,7 +117,7 @@ const EmployeeDetails = ({ employee, closeModal }) => {
         </div>
 
         {/* Compétences Requises Section */}
-        <div className="border-t pt-4 pb-4">
+        <div className="border-t border-b py-4 mb-4">
           <h4 className="text-lg font-semibold">Compétences Requises</h4>
           <div className="flex justify-between">
             <p>Savoirs :</p>
@@ -129,7 +137,7 @@ const EmployeeDetails = ({ employee, closeModal }) => {
           </div>
         </div>
 
-        {/* Close Button */}
+        {/* Bouton Fermer */}
         <div className="text-right mt-6">
           <button onClick={closeModal} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
             Fermer
