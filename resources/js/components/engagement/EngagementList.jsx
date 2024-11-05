@@ -1,6 +1,5 @@
-// EngagementList.jsx
-
 import React, { useState } from 'react';
+import Select from 'react-select';
 import { FaEye, FaEdit, FaTrashAlt, FaPlus } from 'react-icons/fa';
 import EngagementForm from './EngagementForm';
 import BudgetTrackingForm from './BudgetTrackingForm';
@@ -13,6 +12,27 @@ const EngagementList = () => {
     const [showForm, setShowForm] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
     const [activeTab, setActiveTab] = useState('description');
+    const [selectedProject, setSelectedProject] = useState(null); // État pour le projet sélectionné
+
+    // Données simulées des engagements
+    const engagements = [
+        { id: 1, projet: 'Projet 1', service: 'Logistique' },
+        { id: 2, projet: 'Projet 2', service: 'RH' },
+        { id: 3, projet: 'Projet 3', service: 'Finance' },
+    ];
+
+    // Options pour le Select de `react-select`
+    const projectOptions = [
+        { value: '', label: 'Tous les projets' },
+        { value: 'Projet 1', label: 'Projet 1' },
+        { value: 'Projet 2', label: 'Projet 2' },
+        { value: 'Projet 3', label: 'Projet 3' },
+    ];
+
+    // Filtrer les engagements en fonction du projet sélectionné
+    const filteredEngagements = engagements.filter((engagement) => 
+        !selectedProject || engagement.projet === selectedProject.value
+    );
 
     const handleAddClick = () => {
         setShowForm(true);
@@ -62,6 +82,20 @@ const EngagementList = () => {
                 </div>
             </div>
 
+            {/* Formulaire de filtre par projet avec react-select */}
+            <div className="mb-4">
+                <label htmlFor="project-filter" className="text-gray-700 mr-2">Filtrer par projet:</label>
+                <Select
+                    id="project-filter"
+                    value={selectedProject}
+                    onChange={(selectedOption) => setSelectedProject(selectedOption)}
+                    options={projectOptions}
+                    className="w-full lg:w-1/3"
+                    placeholder="Sélectionner un projet"
+                    isClearable
+                />
+            </div>
+
             {showDetails ? (
                 <EngagementDetails 
                     activeTab={activeTab} 
@@ -78,21 +112,23 @@ const EngagementList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="hover:bg-gray-50">
-                            <td className="py-3 px-4 border border-gray-300">SWEDD</td>
-                            <td className="py-3 px-4 border border-gray-300">Logistique</td>
-                            <td className="py-3 px-4 border border-gray-300 flex space-x-4">
-                                <button onClick={() => setShowDetails(true)} className="text-gray-600 hover:text-black focus:outline-none">
-                                    <FaEye />
-                                </button>
-                                <button onClick={() => setShowForm(true)} className="text-gray-600 hover:text-black focus:outline-none">
-                                    <FaEdit />
-                                </button>
-                                <button className="text-red-600 hover:text-red-800 focus:outline-none">
-                                    <FaTrashAlt />
-                                </button>
-                            </td>
-                        </tr>
+                        {filteredEngagements.map((engagement) => (
+                            <tr key={engagement.id} className="hover:bg-gray-50">
+                                <td className="py-3 px-4 border border-gray-300">{engagement.projet}</td>
+                                <td className="py-3 px-4 border border-gray-300">{engagement.service}</td>
+                                <td className="py-3 px-4 border border-gray-300 flex space-x-4">
+                                    <button onClick={() => setShowDetails(true)} className="text-gray-600 hover:text-black focus:outline-none">
+                                        <FaEye />
+                                    </button>
+                                    <button onClick={() => setShowForm(true)} className="text-gray-600 hover:text-black focus:outline-none">
+                                        <FaEdit />
+                                    </button>
+                                    <button className="text-red-600 hover:text-red-800 focus:outline-none">
+                                        <FaTrashAlt />
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             )}

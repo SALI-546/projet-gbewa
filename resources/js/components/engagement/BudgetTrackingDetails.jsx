@@ -1,13 +1,59 @@
 // BudgetTrackingDetails.jsx
+
 import React, { useState } from 'react';
-import { FaEdit } from 'react-icons/fa';
+import { FaEdit, FaSave, FaTimes } from 'react-icons/fa';
 
 const BudgetTrackingDetails = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedSignature, setSelectedSignature] = useState('');
+    // État pour stocker les valeurs éditables
+    const [values, setValues] = useState({
+        'Ligne Budgétaire': 'A0.12',
+        'Montant inscrit au budget': '1,500,000',
+        'Montant déjà dépensé': '500,000',
+        'Montant accordé': '250,000',
+        'Ancien Solde': '1,000,000',
+        'Nouveau Solde': '750,000',
+        'Fournisseurs/Prestataire': 'Nom du Prestataire',
+        'Avis favorable': 'Favorable',
+        'Avis': '“Fermentum urna donec morbi nisi eget euismod morbi in etiam nullam consectetur egestas odio in id tempus mauris quis...”',
+        'Moyens de paiement': 'Caisse',
+    });
 
-    // Fonction pour ouvrir et fermer la modale
-    const toggleModal = () => setIsModalOpen(!isModalOpen);
+    // État pour déterminer quel champ est en mode édition
+    const [editingField, setEditingField] = useState(null);
+
+    // Fonction pour gérer le changement de valeur
+    const handleChange = (e) => {
+        setValues({ ...values, [editingField]: e.target.value });
+    };
+
+    // Fonction pour sauvegarder la nouvelle valeur
+    const handleSave = () => {
+        // Ici, vous pouvez ajouter une logique pour sauvegarder les données (par exemple, une requête API)
+        setEditingField(null);
+    };
+
+    // Fonction pour annuler l'édition
+    const handleCancel = () => {
+        // Vous pouvez réinitialiser la valeur si nécessaire
+        setEditingField(null);
+    };
+
+    // Liste des champs à afficher
+    const fields = [
+        'Ligne Budgétaire',
+        'Montant inscrit au budget',
+        'Montant déjà dépensé',
+        'Montant accordé',
+        'Ancien Solde',
+        'Nouveau Solde',
+        'Fournisseurs/Prestataire',
+        'Avis favorable',
+        'Avis',
+        'Moyens de paiement',
+    ];
+
+    // État pour les signatures
+    const [selectedSignature, setSelectedSignature] = useState('');
 
     // Fonction pour gérer la sélection des signatures
     const handleSignatureChange = (event) => {
@@ -17,78 +63,40 @@ const BudgetTrackingDetails = () => {
     return (
         <div className="bg-white p-4 rounded-lg shadow-md">
             <h3 className="text-lg font-bold mb-4">Suivi Budgétaire</h3>
-            
+
             <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
                 <tbody>
-                    <tr>
-                        <td className="py-2 px-4 font-semibold border-b border-gray-300">Ligne Budgétaire</td>
-                        <td className="py-2 px-4 border-b border-gray-300 flex items-center justify-end space-x-2">
-                            <span>A0.12</span>
-                            <FaEdit className="text-gray-500 cursor-pointer" onClick={toggleModal} />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="py-2 px-4 font-semibold border-b border-gray-300">Montant inscrit au budget</td>
-                        <td className="py-2 px-4 border-b border-gray-300 flex items-center justify-end space-x-2">
-                            <span>1,500,000</span>
-                            <FaEdit className="text-gray-500 cursor-pointer" onClick={toggleModal} />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="py-2 px-4 font-semibold border-b border-gray-300">Montant déjà dépensé</td>
-                        <td className="py-2 px-4 border-b border-gray-300 flex items-center justify-end space-x-2">
-                            <span>500,000</span>
-                            <FaEdit className="text-gray-500 cursor-pointer" onClick={toggleModal} />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="py-2 px-4 font-semibold border-b border-gray-300">Montant accordé</td>
-                        <td className="py-2 px-4 border-b border-gray-300 flex items-center justify-end space-x-2">
-                            <span>250,000</span>
-                            <FaEdit className="text-gray-500 cursor-pointer" onClick={toggleModal} />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="py-2 px-4 font-semibold border-b border-gray-300">Ancien Solde</td>
-                        <td className="py-2 px-4 border-b border-gray-300 flex items-center justify-end space-x-2">
-                            <span>1,000,000</span>
-                            <FaEdit className="text-gray-500 cursor-pointer" onClick={toggleModal} />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="py-2 px-4 font-semibold border-b border-gray-300">Nouveau Solde</td>
-                        <td className="py-2 px-4 border-b border-gray-300 flex items-center justify-end space-x-2">
-                            <span>750,000</span>
-                            <FaEdit className="text-gray-500 cursor-pointer" onClick={toggleModal} />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="py-2 px-4 font-semibold border-b border-gray-300">Fournisseurs/Prestataire</td>
-                        <td className="py-2 px-4 border-b border-gray-300 flex items-center justify-end space-x-2">
-                            <span>Nom du Prestataire</span>
-                            <FaEdit className="text-gray-500 cursor-pointer" onClick={toggleModal} />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="py-2 px-4 font-semibold border-b border-gray-300">Avis favorable</td>
-                        <td className="py-2 px-4 border-b border-gray-300 flex items-center justify-end space-x-2">
-                            <span>Favorable</span>
-                            <FaEdit className="text-gray-500 cursor-pointer" onClick={toggleModal} />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="py-2 px-4 font-semibold border-b border-gray-300">Avis</td>
-                        <td className="py-2 px-4 border-b border-gray-300">
-                            “Fermentum urna donec morbi nisi eget euismod morbi in etiam nullam consectetur egestas odio in id tempus mauris quis...”
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="py-2 px-4 font-semibold border-b border-gray-300">Moyens de paiement</td>
-                        <td className="py-2 px-4 border-b border-gray-300 flex items-center justify-end space-x-2">
-                            <span>Caisse</span>
-                            <FaEdit className="text-gray-500 cursor-pointer" onClick={toggleModal} />
-                        </td>
-                    </tr>
+                    {fields.map((field) => (
+                        <tr key={field}>
+                            <td className="py-2 px-4 font-semibold border-b border-gray-300">{field}</td>
+                            <td className="py-2 px-4 border-b border-gray-300 flex items-center justify-end space-x-2">
+                                {editingField === field ? (
+                                    <>
+                                        <input
+                                            type="text"
+                                            value={values[field]}
+                                            onChange={handleChange}
+                                            className="border border-gray-300 rounded-lg px-2 py-1 w-full"
+                                        />
+                                        <button onClick={handleSave} className="text-green-500 hover:text-green-700">
+                                            <FaSave />
+                                        </button>
+                                        <button onClick={handleCancel} className="text-red-500 hover:text-red-700">
+                                            <FaTimes />
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <span>{values[field]}</span>
+                                        <FaEdit
+                                            className="text-gray-500 cursor-pointer"
+                                            onClick={() => setEditingField(field)}
+                                        />
+                                    </>
+                                )}
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
 
@@ -129,69 +137,20 @@ const BudgetTrackingDetails = () => {
                         />
                         <span>Visa DAF</span>
                     </label>
+                    {/* Ajout de Visa DEF */}
+                    <label className="flex items-center space-x-2">
+                        <input
+                            type="radio"
+                            name="signature"
+                            value="Visa DEF"
+                            checked={selectedSignature === 'Visa DEF'}
+                            onChange={handleSignatureChange}
+                            className="form-radio h-5 w-5 text-green-500"
+                        />
+                        <span>Visa DEF</span>
+                    </label>
                 </div>
             </div>
-
-            {/* Modale */}
-            {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"> 
-                    <div className="bg-white rounded-lg p-6 w-1/3">
-                        <h2 className="text-2xl font-bold mb-4">ORDRE DE PAIEMENT</h2>
-                        
-                        <form>
-                            <div className="mb-4">
-                                <label className="block text-gray-700">Nom du projet</label>
-                                <input
-                                    type="text"
-                                    className="border border-gray-300 rounded-lg w-full px-4 py-2"
-                                    placeholder="SWEDD"
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label className="block text-gray-700">COMPTE</label>
-                                <input
-                                    type="text"
-                                    className="border border-gray-300 rounded-lg w-full px-4 py-2"
-                                    placeholder="ONG GBEWA PIB SWEDD"
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label className="block text-gray-700">INTITULE</label>
-                                <input
-                                    type="text"
-                                    className="border border-gray-300 rounded-lg w-full px-4 py-2"
-                                    placeholder="003712170137"
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label className="block text-gray-700">N° Facture</label>
-                                <div className="relative">
-                                 
-                                    <input
-                                        type="date"
-                                        className="border border-gray-300 rounded-lg w-full px-4 py-2"
-                                    />
-                                </div>
-                            </div>
-                            <div className="mb-4">
-                                <label className="block text-gray-700">N° BL</label>
-                                <input
-                                    type="text"
-                                    className="border border-gray-300 rounded-lg w-full px-4 py-2"
-                                    placeholder="106/MOOV/24"
-                                />
-                            </div>
-                            <button
-                                type="button"
-                                onClick={toggleModal}
-                                className="mt-4 bg-green-500 text-white px-4 py-2 rounded"
-                            >
-                                Fermer
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };

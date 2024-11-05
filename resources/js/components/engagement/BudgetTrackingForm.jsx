@@ -135,6 +135,10 @@ const BudgetTrackingForm = ({ onClose }) => {
                                 <input type="radio" name="signature" className="form-radio text-green-500" />
                                 <span>Visa DAF</span>
                             </label>
+                            <label className="flex items-center space-x-2">
+                                <input type="radio" name="signature" className="form-radio text-green-500" />
+                                <span>Visa DEF</span>
+                            </label>
                         </div>
                     </div>
 

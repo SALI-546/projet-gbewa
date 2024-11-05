@@ -1,8 +1,29 @@
-import React from 'react';
+// PaymentOrderDetails.jsx
+
+import React, { useState } from 'react';
 import { FaChevronLeft } from 'react-icons/fa'; // Icône pour retour
 
 const PaymentOrderDetails = ({ isVisible, order, onClose }) => {
     if (!isVisible || !order) return null;
+
+    // État pour les signatures
+    const [signatures, setSignatures] = useState({
+        emetteur: { signed: false, date: '' },
+        controle: { signed: false, date: '' },
+        validation: { signed: false, date: '' },
+    });
+
+    // Fonction pour gérer le changement de signature
+    const handleSignatureChange = (role) => {
+        setSignatures({
+            ...signatures,
+            [role]: {
+                ...signatures[role],
+                signed: !signatures[role].signed,
+                date: !signatures[role].signed ? new Date().toISOString().slice(0, 10) : '',
+            },
+        });
+    };
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -36,7 +57,7 @@ const PaymentOrderDetails = ({ isVisible, order, onClose }) => {
                         <tr>
                             <th className="py-2 px-4 bg-gray-100 text-center font-medium text-gray-600 border border-gray-300">N°</th>
                             <th className="py-2 px-4 bg-gray-100 text-center font-medium text-gray-600 border border-gray-300">Bénéficiaires</th>
-                            <th className="py-2 px-4 bg-gray-100 text-center font-medium text-gray-600 border border-gray-300">Sommes nettes revenants aux bénéficiaires</th>
+                            <th className="py-2 px-4 bg-gray-100 text-center font-medium text-gray-600 border border-gray-300">Sommes nettes revenant aux bénéficiaires</th>
                             <th className="py-2 px-4 bg-gray-100 text-center font-medium text-gray-600 border border-gray-300">Objet de la dépense</th>
                             <th className="py-2 px-4 bg-gray-100 text-center font-medium text-gray-600 border border-gray-300">Ligne budgétaire</th>
                             <th className="py-2 px-4 bg-gray-100 text-center font-medium text-gray-600 border border-gray-300">Pièces Jointes</th>
@@ -76,7 +97,7 @@ const PaymentOrderDetails = ({ isVisible, order, onClose }) => {
                             <td className="py-2 px-4 border border-gray-300"></td>
                             <td className="py-2 px-4 border border-gray-300"></td>
                         </tr>
-                        {/* Lignes pour les Totaux uniquement sous "Sommes nettes revenants aux bénéficiaires" */}
+                        {/* Lignes pour les Totaux uniquement sous "Sommes nettes revenant aux bénéficiaires" */}
                         <tr className="text-center font-bold">
                             <td colSpan="2" className="py-2 px-4 text-left border-none">TOTAL DEMANDE:</td>
                             <td className="py-2 px-4 border border-gray-300 border-l-2 border-r-2">415 360 FCFA</td>
@@ -108,22 +129,67 @@ const PaymentOrderDetails = ({ isVisible, order, onClose }) => {
 
                 {/* Signatures */}
                 <div className="mt-8 grid grid-cols-3 text-center">
+                    {/* EMETTEUR */}
                     <div>
                         <p className="font-bold">EMETTEUR (signature et date)</p>
-                        <p>Le chargé de logistique</p>
-                        <p>SINSIN Daniel</p>
+                        <div className="flex flex-col items-center">
+                            {/* Input pour la signature */}
+                            <label className="flex items-center space-x-2">
+                                <input
+                                    type="checkbox"
+                                    checked={signatures.emetteur.signed}
+                                    onChange={() => handleSignatureChange('emetteur')}
+                                />
+                                <span>Signer</span>
+                            </label>
+                            {/* Affichage de la date si signé */}
+                            {signatures.emetteur.signed && (
+                                <p className="mt-2">{`Signé le : ${signatures.emetteur.date}`}</p>
+                            )}
+                            <p>Le chargé de logistique</p>
+                            <p>SINSIN Daniel</p>
+                        </div>
                     </div>
+                    {/* CONTROLE */}
                     <div>
                         <p className="font-bold">CONTROLE (signature et date)</p>
-                        <p>Le DAF</p>
-                        <p>GNONHOSSOU Brice</p>
+                        <div className="flex flex-col items-center">
+                            <label className="flex items-center space-x-2">
+                                <input
+                                    type="checkbox"
+                                    checked={signatures.controle.signed}
+                                    onChange={() => handleSignatureChange('controle')}
+                                />
+                                <span>Signer</span>
+                            </label>
+                            {signatures.controle.signed && (
+                                <p className="mt-2">{`Signé le : ${signatures.controle.date}`}</p>
+                            )}
+                            <p>Le DAF</p>
+                            <p>GNONHOSSOU Brice</p>
+                        </div>
                     </div>
+                    {/* VALIDATION */}
                     <div>
                         <p className="font-bold">VALIDATION (signature et date)</p>
-                        <p>Le Directeur Exécutif</p>
-                        <p>AHOLOU G. Minhoumon</p>
+                        <div className="flex flex-col items-center">
+                            <label className="flex items-center space-x-2">
+                                <input
+                                    type="checkbox"
+                                    checked={signatures.validation.signed}
+                                    onChange={() => handleSignatureChange('validation')}
+                                />
+                                <span>Signer</span>
+                            </label>
+                            {signatures.validation.signed && (
+                                <p className="mt-2">{`Signé le : ${signatures.validation.date}`}</p>
+                            )}
+                            <p>Le Directeur Exécutif</p>
+                            <p>AHOLOU G. Minhoumon</p>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     );
