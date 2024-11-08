@@ -147,7 +147,7 @@ const BudgetTrackingDetails = () => {
                             onChange={handleSignatureChange}
                             className="form-radio h-5 w-5 text-green-500"
                         />
-                        <span>Visa DEF</span>
+                        <span>Visa DE</span>
                     </label>
                 </div>
             </div>

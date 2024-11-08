@@ -95,6 +95,12 @@
                 <div class="bg-white shadow p-6">
                     <div class="text-3xl font-bold mb-4">Gestion des Finances</div>
                     <div class="flex items-center">
+                        <!-- Div for Fiche d'Engagement -->
+                        <div class="bg-gray-200 text-gray-700 py-2 px-4 rounded mr-2" id="ficheEngagementDiv">
+                            <a href="{{ route('engagement.page') }}" class="text-gray-700" id="ficheEngagementLink">
+                                <i class="fas fa-file-contract"></i> Fiche d’Engagement
+                            </a>
+                        </div>
                         <!-- Div for Demande de Paiement -->
                         <div class="bg-gray-200 text-gray-700 py-2 px-4 rounded mr-2" id="demandePaiementDiv">
                             <a href="{{ route('payments.page') }}" class="text-gray-700" id="demandePaiementLink">
@@ -102,15 +108,9 @@
                             </a>
                         </div>
                         <!-- Div for Ordre de Paiement -->
-                        <div class="bg-gray-200 text-gray-700 py-2 px-4 rounded mr-2" id="ordrePaiementDiv">
+                        <div class="bg-gray-200 text-gray-700 py-2 px-4 rounded" id="ordrePaiementDiv">
                             <a href="{{ route('orderpayment.page2') }}" class="text-gray-700" id="ordrePaiementLink">
                                 <i class="fas fa-money-check-alt"></i> Ordre de Paiement
-                            </a>
-                        </div>
-                        <!-- Div for Fiche d'Engagement -->
-                        <div class="bg-gray-200 text-gray-700 py-2 px-4 rounded" id="ficheEngagementDiv">
-                            <a href="{{ route('engagement.page') }}" class="text-gray-700" id="ficheEngagementLink">
-                                <i class="fas fa-file-contract"></i> Fiche d’Engagement
                             </a>
                         </div>
                     </div>
